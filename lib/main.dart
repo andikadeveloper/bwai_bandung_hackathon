@@ -2,6 +2,7 @@ import 'package:bwai_bandung_hackathon/core/routes/router.dart';
 import 'package:bwai_bandung_hackathon/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'core/di/injectable.dart';
 
 void main() async {
@@ -9,6 +10,10 @@ void main() async {
 
   await dotenv.load(fileName: '.env');
   configureDependencies();
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL'] ?? '',
+    anonKey: dotenv.env['SUPABASE_ANON_KEY'] ?? '',
+  );
   runApp(const MyApp());
 }
 
