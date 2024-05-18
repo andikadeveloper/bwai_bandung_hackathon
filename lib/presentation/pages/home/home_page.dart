@@ -2,7 +2,7 @@ import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'widgets/add_transaction_section.dart';
+import 'widgets/add_transaction_bottom_sheet/add_transaction_bottom_sheet.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -38,7 +38,18 @@ class HomePage extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: const AddTransactionSection(),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () async {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) {
+              return const AddTransactionBottomSheet();
+            },
+          );
+        },
+      ),
     );
   }
 }
