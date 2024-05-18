@@ -3,7 +3,7 @@ part of 'form_transaction_cubit.dart';
 class FormTransactionState {
   final int amount;
   final String note;
-  final int categoryId;
+  final Category category;
   final DateTime transactionDate;
   final bool isLoading;
   final bool isSuccess;
@@ -11,7 +11,12 @@ class FormTransactionState {
   FormTransactionState({
     this.amount = 0,
     this.note = '',
-    this.categoryId = 0,
+    this.category = const Category(
+      id: 0,
+      name: '',
+      code: '',
+      type: CategoryType.income,
+    ),
     DateTime? transactionDate,
     this.isLoading = false,
     this.isSuccess = false,
@@ -20,7 +25,7 @@ class FormTransactionState {
   FormTransactionState copyWith({
     int? amount,
     String? note,
-    int? categoryId,
+    Category? category,
     DateTime? transactionDate,
     bool? isLoading,
     bool? isSuccess,
@@ -28,7 +33,7 @@ class FormTransactionState {
     return FormTransactionState(
       amount: amount ?? this.amount,
       note: note ?? this.note,
-      categoryId: categoryId ?? this.categoryId,
+      category: category ?? this.category,
       transactionDate: transactionDate ?? this.transactionDate,
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,

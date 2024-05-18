@@ -19,6 +19,13 @@ class AddTransactionBottomSheet extends StatefulWidget {
 
 class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
   @override
+  void initState() {
+    super.initState();
+
+    context.read<FormTransactionCubit>().getDefaultCategory();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvoked: (canPop) {
@@ -56,9 +63,9 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // Category
-                        CategorySection(selectedCategoryId: state.categoryId),
+                        CategorySection(selectedCategory: state.category),
 
-                        const SizedBox(width: 16.0),
+                        const SizedBox(width: 8.0),
 
                         // Date
                         DateSection(

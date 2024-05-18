@@ -33,6 +33,9 @@ class AmountSection extends StatelessWidget {
             ),
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.send,
+            onSubmitted: (_) {
+              context.read<FormTransactionCubit>().addTransaction();
+            },
           ),
         ),
       ],
