@@ -22,6 +22,8 @@ mixin _$HomeState {
     required TResult Function() loading,
     required TResult Function(GenerateContentResponse value) success,
     required TResult Function(String message) failure,
+    required TResult Function(AuthResponse? user) successGetUserApi,
+    required TResult Function(UserResponse? user) successGetUserSession,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +32,8 @@ mixin _$HomeState {
     TResult? Function()? loading,
     TResult? Function(GenerateContentResponse value)? success,
     TResult? Function(String message)? failure,
+    TResult? Function(AuthResponse? user)? successGetUserApi,
+    TResult? Function(UserResponse? user)? successGetUserSession,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +42,8 @@ mixin _$HomeState {
     TResult Function()? loading,
     TResult Function(GenerateContentResponse value)? success,
     TResult Function(String message)? failure,
+    TResult Function(AuthResponse? user)? successGetUserApi,
+    TResult Function(UserResponse? user)? successGetUserSession,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +53,9 @@ mixin _$HomeState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_SuccessGetUserApi value) successGetUserApi,
+    required TResult Function(_SuccessGetUserSession value)
+        successGetUserSession,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +64,8 @@ mixin _$HomeState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult? Function(_SuccessGetUserSession value)? successGetUserSession,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +74,8 @@ mixin _$HomeState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult Function(_SuccessGetUserSession value)? successGetUserSession,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,6 +140,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(GenerateContentResponse value) success,
     required TResult Function(String message) failure,
+    required TResult Function(AuthResponse? user) successGetUserApi,
+    required TResult Function(UserResponse? user) successGetUserSession,
   }) {
     return initial();
   }
@@ -138,6 +153,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(GenerateContentResponse value)? success,
     TResult? Function(String message)? failure,
+    TResult? Function(AuthResponse? user)? successGetUserApi,
+    TResult? Function(UserResponse? user)? successGetUserSession,
   }) {
     return initial?.call();
   }
@@ -149,6 +166,8 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(GenerateContentResponse value)? success,
     TResult Function(String message)? failure,
+    TResult Function(AuthResponse? user)? successGetUserApi,
+    TResult Function(UserResponse? user)? successGetUserSession,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -164,6 +183,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_SuccessGetUserApi value) successGetUserApi,
+    required TResult Function(_SuccessGetUserSession value)
+        successGetUserSession,
   }) {
     return initial(this);
   }
@@ -175,6 +197,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult? Function(_SuccessGetUserSession value)? successGetUserSession,
   }) {
     return initial?.call(this);
   }
@@ -186,6 +210,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult Function(_SuccessGetUserSession value)? successGetUserSession,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -241,6 +267,8 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(GenerateContentResponse value) success,
     required TResult Function(String message) failure,
+    required TResult Function(AuthResponse? user) successGetUserApi,
+    required TResult Function(UserResponse? user) successGetUserSession,
   }) {
     return loading();
   }
@@ -252,6 +280,8 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(GenerateContentResponse value)? success,
     TResult? Function(String message)? failure,
+    TResult? Function(AuthResponse? user)? successGetUserApi,
+    TResult? Function(UserResponse? user)? successGetUserSession,
   }) {
     return loading?.call();
   }
@@ -263,6 +293,8 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(GenerateContentResponse value)? success,
     TResult Function(String message)? failure,
+    TResult Function(AuthResponse? user)? successGetUserApi,
+    TResult Function(UserResponse? user)? successGetUserSession,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -278,6 +310,9 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_SuccessGetUserApi value) successGetUserApi,
+    required TResult Function(_SuccessGetUserSession value)
+        successGetUserSession,
   }) {
     return loading(this);
   }
@@ -289,6 +324,8 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult? Function(_SuccessGetUserSession value)? successGetUserSession,
   }) {
     return loading?.call(this);
   }
@@ -300,6 +337,8 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult Function(_SuccessGetUserSession value)? successGetUserSession,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -381,6 +420,8 @@ class _$SuccessImpl implements _Success {
     required TResult Function() loading,
     required TResult Function(GenerateContentResponse value) success,
     required TResult Function(String message) failure,
+    required TResult Function(AuthResponse? user) successGetUserApi,
+    required TResult Function(UserResponse? user) successGetUserSession,
   }) {
     return success(value);
   }
@@ -392,6 +433,8 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? loading,
     TResult? Function(GenerateContentResponse value)? success,
     TResult? Function(String message)? failure,
+    TResult? Function(AuthResponse? user)? successGetUserApi,
+    TResult? Function(UserResponse? user)? successGetUserSession,
   }) {
     return success?.call(value);
   }
@@ -403,6 +446,8 @@ class _$SuccessImpl implements _Success {
     TResult Function()? loading,
     TResult Function(GenerateContentResponse value)? success,
     TResult Function(String message)? failure,
+    TResult Function(AuthResponse? user)? successGetUserApi,
+    TResult Function(UserResponse? user)? successGetUserSession,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -418,6 +463,9 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_SuccessGetUserApi value) successGetUserApi,
+    required TResult Function(_SuccessGetUserSession value)
+        successGetUserSession,
   }) {
     return success(this);
   }
@@ -429,6 +477,8 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult? Function(_SuccessGetUserSession value)? successGetUserSession,
   }) {
     return success?.call(this);
   }
@@ -440,6 +490,8 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult Function(_SuccessGetUserSession value)? successGetUserSession,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -526,6 +578,8 @@ class _$FailureImpl implements _Failure {
     required TResult Function() loading,
     required TResult Function(GenerateContentResponse value) success,
     required TResult Function(String message) failure,
+    required TResult Function(AuthResponse? user) successGetUserApi,
+    required TResult Function(UserResponse? user) successGetUserSession,
   }) {
     return failure(message);
   }
@@ -537,6 +591,8 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? loading,
     TResult? Function(GenerateContentResponse value)? success,
     TResult? Function(String message)? failure,
+    TResult? Function(AuthResponse? user)? successGetUserApi,
+    TResult? Function(UserResponse? user)? successGetUserSession,
   }) {
     return failure?.call(message);
   }
@@ -548,6 +604,8 @@ class _$FailureImpl implements _Failure {
     TResult Function()? loading,
     TResult Function(GenerateContentResponse value)? success,
     TResult Function(String message)? failure,
+    TResult Function(AuthResponse? user)? successGetUserApi,
+    TResult Function(UserResponse? user)? successGetUserSession,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -563,6 +621,9 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_SuccessGetUserApi value) successGetUserApi,
+    required TResult Function(_SuccessGetUserSession value)
+        successGetUserSession,
   }) {
     return failure(this);
   }
@@ -574,6 +635,8 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult? Function(_SuccessGetUserSession value)? successGetUserSession,
   }) {
     return failure?.call(this);
   }
@@ -585,6 +648,8 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult Function(_SuccessGetUserSession value)? successGetUserSession,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -601,4 +666,325 @@ abstract class _Failure implements HomeState {
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SuccessGetUserApiImplCopyWith<$Res> {
+  factory _$$SuccessGetUserApiImplCopyWith(_$SuccessGetUserApiImpl value,
+          $Res Function(_$SuccessGetUserApiImpl) then) =
+      __$$SuccessGetUserApiImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AuthResponse? user});
+}
+
+/// @nodoc
+class __$$SuccessGetUserApiImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$SuccessGetUserApiImpl>
+    implements _$$SuccessGetUserApiImplCopyWith<$Res> {
+  __$$SuccessGetUserApiImplCopyWithImpl(_$SuccessGetUserApiImpl _value,
+      $Res Function(_$SuccessGetUserApiImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(_$SuccessGetUserApiImpl(
+      freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as AuthResponse?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessGetUserApiImpl implements _SuccessGetUserApi {
+  const _$SuccessGetUserApiImpl(this.user);
+
+  @override
+  final AuthResponse? user;
+
+  @override
+  String toString() {
+    return 'HomeState.successGetUserApi(user: $user)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessGetUserApiImpl &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessGetUserApiImplCopyWith<_$SuccessGetUserApiImpl> get copyWith =>
+      __$$SuccessGetUserApiImplCopyWithImpl<_$SuccessGetUserApiImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(GenerateContentResponse value) success,
+    required TResult Function(String message) failure,
+    required TResult Function(AuthResponse? user) successGetUserApi,
+    required TResult Function(UserResponse? user) successGetUserSession,
+  }) {
+    return successGetUserApi(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(GenerateContentResponse value)? success,
+    TResult? Function(String message)? failure,
+    TResult? Function(AuthResponse? user)? successGetUserApi,
+    TResult? Function(UserResponse? user)? successGetUserSession,
+  }) {
+    return successGetUserApi?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(GenerateContentResponse value)? success,
+    TResult Function(String message)? failure,
+    TResult Function(AuthResponse? user)? successGetUserApi,
+    TResult Function(UserResponse? user)? successGetUserSession,
+    required TResult orElse(),
+  }) {
+    if (successGetUserApi != null) {
+      return successGetUserApi(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_SuccessGetUserApi value) successGetUserApi,
+    required TResult Function(_SuccessGetUserSession value)
+        successGetUserSession,
+  }) {
+    return successGetUserApi(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult? Function(_SuccessGetUserSession value)? successGetUserSession,
+  }) {
+    return successGetUserApi?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult Function(_SuccessGetUserSession value)? successGetUserSession,
+    required TResult orElse(),
+  }) {
+    if (successGetUserApi != null) {
+      return successGetUserApi(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessGetUserApi implements HomeState {
+  const factory _SuccessGetUserApi(final AuthResponse? user) =
+      _$SuccessGetUserApiImpl;
+
+  AuthResponse? get user;
+  @JsonKey(ignore: true)
+  _$$SuccessGetUserApiImplCopyWith<_$SuccessGetUserApiImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SuccessGetUserSessionImplCopyWith<$Res> {
+  factory _$$SuccessGetUserSessionImplCopyWith(
+          _$SuccessGetUserSessionImpl value,
+          $Res Function(_$SuccessGetUserSessionImpl) then) =
+      __$$SuccessGetUserSessionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UserResponse? user});
+}
+
+/// @nodoc
+class __$$SuccessGetUserSessionImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$SuccessGetUserSessionImpl>
+    implements _$$SuccessGetUserSessionImplCopyWith<$Res> {
+  __$$SuccessGetUserSessionImplCopyWithImpl(_$SuccessGetUserSessionImpl _value,
+      $Res Function(_$SuccessGetUserSessionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(_$SuccessGetUserSessionImpl(
+      freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserResponse?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessGetUserSessionImpl implements _SuccessGetUserSession {
+  const _$SuccessGetUserSessionImpl(this.user);
+
+  @override
+  final UserResponse? user;
+
+  @override
+  String toString() {
+    return 'HomeState.successGetUserSession(user: $user)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessGetUserSessionImpl &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessGetUserSessionImplCopyWith<_$SuccessGetUserSessionImpl>
+      get copyWith => __$$SuccessGetUserSessionImplCopyWithImpl<
+          _$SuccessGetUserSessionImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(GenerateContentResponse value) success,
+    required TResult Function(String message) failure,
+    required TResult Function(AuthResponse? user) successGetUserApi,
+    required TResult Function(UserResponse? user) successGetUserSession,
+  }) {
+    return successGetUserSession(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(GenerateContentResponse value)? success,
+    TResult? Function(String message)? failure,
+    TResult? Function(AuthResponse? user)? successGetUserApi,
+    TResult? Function(UserResponse? user)? successGetUserSession,
+  }) {
+    return successGetUserSession?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(GenerateContentResponse value)? success,
+    TResult Function(String message)? failure,
+    TResult Function(AuthResponse? user)? successGetUserApi,
+    TResult Function(UserResponse? user)? successGetUserSession,
+    required TResult orElse(),
+  }) {
+    if (successGetUserSession != null) {
+      return successGetUserSession(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_SuccessGetUserApi value) successGetUserApi,
+    required TResult Function(_SuccessGetUserSession value)
+        successGetUserSession,
+  }) {
+    return successGetUserSession(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult? Function(_SuccessGetUserSession value)? successGetUserSession,
+  }) {
+    return successGetUserSession?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_SuccessGetUserApi value)? successGetUserApi,
+    TResult Function(_SuccessGetUserSession value)? successGetUserSession,
+    required TResult orElse(),
+  }) {
+    if (successGetUserSession != null) {
+      return successGetUserSession(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessGetUserSession implements HomeState {
+  const factory _SuccessGetUserSession(final UserResponse? user) =
+      _$SuccessGetUserSessionImpl;
+
+  UserResponse? get user;
+  @JsonKey(ignore: true)
+  _$$SuccessGetUserSessionImplCopyWith<_$SuccessGetUserSessionImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

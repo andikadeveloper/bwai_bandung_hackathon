@@ -4,6 +4,6 @@ part of 'login_cubit.dart';
 class LoginState with _$LoginState {
   const factory LoginState.initial() = _Initial;
   const factory LoginState.loading() = _Loading;
-  const factory LoginState.success(GenerateContentResponse value) = _Success;
+  const factory LoginState.success(AuthResponse value) = _Success;
   const factory LoginState.failure(String message) = _Failure;
 }

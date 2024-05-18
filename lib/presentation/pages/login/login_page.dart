@@ -1,4 +1,6 @@
+import 'package:bwai_bandung_hackathon/presentation/pages/login/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatelessWidget {
@@ -14,28 +16,18 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              OutlinedButton.icon(
-                onPressed: () {
-                  debugPrint('Continue with Apple clicked');
-                },
-                icon: SvgPicture.asset(
-                  'assets/icons/appleinc.svg',
-                  width: 18,
-                  height: 18,
-                ),
-                label: const Text('Continue with Apple'),
-              ),
               FilledButton.icon(
                 onPressed: () {
-                  debugPrint('Continue with Google clicked');
+                  context.read<LoginCubit>().loginWithGoogle(context);
                 },
                 icon: SvgPicture.asset(
                   'assets/icons/google.svg',
                   width: 18,
                   height: 18,
-                  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  colorFilter:
+                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 ),
-                label: const Text('Continue with Google'),
+                label: const Text('Sign in with Google'),
               ),
             ],
           ),
