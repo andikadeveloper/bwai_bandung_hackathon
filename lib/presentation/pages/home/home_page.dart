@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             return state.when(
@@ -29,38 +29,41 @@ class HomePage extends StatelessWidget {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        leading: GestureDetector(
-          onTap: () => context.read<HomeCubit>().goToProfileOrLogin(context),
-          child: BlocBuilder<HomeCubit, HomeState>(
-            builder: (context, state) {
-              return state.when(
-                initial: () => const CircleAvatar(
-                  child: Text('U'),
-                ),
-                loading: () => const CircleAvatar(
-                  child: Text('U'),
-                ),
-                success: (value) => const CircleAvatar(
-                  child: Text('U'),
-                ),
-                failure: (message) => const CircleAvatar(
-                  child: Text('U'),
-                ),
-                successGetUserApi: (user) => CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    user?.user?.userMetadata?['avatar_url'],
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: GestureDetector(
+            onTap: () => context.read<HomeCubit>().goToProfileOrLogin(context),
+            child: BlocBuilder<HomeCubit, HomeState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const CircleAvatar(
+                    child: Text('U'),
                   ),
-                ),
-                successGetUserSession: (user) => CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    user?.user?.userMetadata?['avatar_url'],
+                  loading: () => const CircleAvatar(
+                    child: Text('U'),
                   ),
-                ),
-              );
-            },
+                  success: (value) => const CircleAvatar(
+                    child: Text('U'),
+                  ),
+                  failure: (message) => const CircleAvatar(
+                    child: Text('U'),
+                  ),
+                  successGetUserApi: (user) => CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      user?.user?.userMetadata?['avatar_url'],
+                    ),
+                  ),
+                  successGetUserSession: (user) => CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      user?.user?.userMetadata?['avatar_url'],
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
         ),
-        leadingWidth: 60.0,
+        leadingWidth: 72.0,
       ),
       body: Center(
         child: BlocBuilder<HomeCubit, HomeState>(

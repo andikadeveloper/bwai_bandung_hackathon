@@ -60,14 +60,16 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> goToProfileOrLogin(BuildContext context) async {
-    try {  
+    try {
       final result = await getUserUseCase();
-
-      if (result is GetUserUseCase) {
-        context.push(PathRoute.profile);
-      } else {
-        _toLogin(context);
-      }
+      result.when(
+        success: (value) {
+          context.push(PathRoute.profile);
+        },
+        failure: (message) {
+          _toLogin(context);
+        },
+      );
     } catch (e) {
       _toLogin(context);
     }
