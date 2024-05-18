@@ -1,5 +1,5 @@
-import 'package:bwai_bandung_hackathon/core/routes/router.dart';
-import 'package:bwai_bandung_hackathon/core/theme/theme.dart';
+import 'package:bwai_bandung_hackathon/presentation/routes/router.dart';
+import 'package:bwai_bandung_hackathon/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
