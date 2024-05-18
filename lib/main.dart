@@ -1,4 +1,5 @@
 import 'package:bwai_bandung_hackathon/core/routes/router.dart';
+import 'package:bwai_bandung_hackathon/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'core/di/injectable.dart';
@@ -18,11 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Build with AI Bandung Hackathon',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        fontFamily: 'Plus Jakarta Sans',
-      ),
+      theme: theme,
       routerConfig: router,
     );
   }
