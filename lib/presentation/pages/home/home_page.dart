@@ -1,8 +1,9 @@
 import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.dart';
+import 'package:bwai_bandung_hackathon/presentation/routes/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'widgets/add_transaction_bottom_sheet/add_transaction_bottom_sheet.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,9 +18,12 @@ class HomePage extends StatelessWidget {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        leading: const CircleAvatar(
-          backgroundImage: NetworkImage(
-            'https://reqres.in/img/faces/7-image.jpg',
+        leading: GestureDetector(
+          onTap: () => context.push(PathRoute.login),
+          child: const CircleAvatar(
+            backgroundImage: NetworkImage(
+              'https://reqres.in/img/faces/7-image.jpg',
+            ),
           ),
         ),
         leadingWidth: 60.0,

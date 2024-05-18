@@ -6,3 +6,7 @@
 3. Run `flutter pub get` to install dependencies
 4. Run `flutter run` to start the app
 5. Enjoy!
+
+## How to setup cubit
+1. Create cubit and state
+2. Run `flutter pub run build_runner build --delete-conflicting-outputs` to generate .freezed.dart
