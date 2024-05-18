@@ -10,7 +10,18 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        centerTitle: true,
+        title: const Text('Hi, Andika👋'),
+        titleTextStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 20.0,
+        ),
+        leading: const CircleAvatar(
+          backgroundImage: NetworkImage(
+            'https://reqres.in/img/faces/7-image.jpg',
+          ),
+        ),
+        leadingWidth: 60.0,
       ),
       body: Center(
         child: BlocBuilder<HomeCubit, HomeState>(
