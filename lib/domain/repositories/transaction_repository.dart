@@ -1,4 +1,5 @@
 import 'package:bwai_bandung_hackathon/core/result/result.dart';
+import 'package:bwai_bandung_hackathon/domain/entities/transaction.dart';
 
 abstract class TransactionRepository {
   Future<Result<bool>> create({
@@ -7,4 +8,14 @@ abstract class TransactionRepository {
     required int categoryId,
     required DateTime transactionDate,
   });
+
+  Future<Result<bool>> update({
+    required int id,
+    required int amount,
+    required String note,
+    required int categoryId,
+    required DateTime transactionDate,
+  });
+
+  Future<Result<Transaction>> getById(int id);
 }

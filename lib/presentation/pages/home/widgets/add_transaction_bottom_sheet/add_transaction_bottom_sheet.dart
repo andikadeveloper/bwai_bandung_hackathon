@@ -10,7 +10,10 @@ import 'package:go_router/go_router.dart';
 class AddTransactionBottomSheet extends StatefulWidget {
   const AddTransactionBottomSheet({
     super.key,
+    this.transactionId,
   });
+
+  final int? transactionId;
 
   @override
   State<AddTransactionBottomSheet> createState() =>
@@ -22,7 +25,13 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
   void initState() {
     super.initState();
 
-    context.read<FormTransactionCubit>().getDefaultCategory();
+    if (widget.transactionId != null) {
+      context
+          .read<FormTransactionCubit>()
+          .getTransactionById(widget.transactionId!);
+    } else {
+      context.read<FormTransactionCubit>().getDefaultCategory();
+    }
   }
 
   @override
@@ -55,10 +64,11 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Amount
-                    const AmountSection(),
+                    AmountSection(amount: state.amount),
 
                     // Note
-                    const NoteSection(),
+                    NoteSection(note: state.note),
+
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -81,8 +91,9 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: IconButton(
-                        onPressed:
-                            context.read<FormTransactionCubit>().addTransaction,
+                        onPressed: context
+                            .read<FormTransactionCubit>()
+                            .upsertTransaction,
                         icon: const Icon(Icons.send),
                         color: Colors.deepPurple,
                       ),

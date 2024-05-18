@@ -3,16 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NoteSection extends StatefulWidget {
-  const NoteSection({super.key});
+  const NoteSection({super.key, this.note});
+
+  final String? note;
 
   @override
   State<NoteSection> createState() => _NoteSectionState();
 }
 
 class _NoteSectionState extends State<NoteSection> {
+  final TextEditingController noteController = TextEditingController();
+
+  @override
+  void didUpdateWidget(covariant NoteSection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    noteController.text = widget.note ?? '';
+  }
+
+  @override
+  void dispose() {
+    noteController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: noteController,
       onChanged: context.read<FormTransactionCubit>().setNote,
       style: Theme.of(context).textTheme.titleMedium,
       decoration: InputDecoration(

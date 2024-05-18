@@ -27,49 +27,51 @@ class CategorySection extends StatelessWidget {
             context: context,
             isScrollControlled: true,
             builder: (context) {
-              return BlocBuilder<CategoryCubit, CategoryState>(
-                builder: (context, state) {
-                  return state.when(
-                    initial: () {
-                      context.read<CategoryCubit>().getCategories();
+              return SafeArea(
+                child: BlocBuilder<CategoryCubit, CategoryState>(
+                  builder: (context, state) {
+                    return state.when(
+                      initial: () {
+                        context.read<CategoryCubit>().getCategories();
 
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                    loading: () {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                    success: (categories) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: categories.length,
-                        itemBuilder: (context, index) {
-                          final category = categories[index];
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                      loading: () {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                      success: (categories) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: categories.length,
+                          itemBuilder: (context, index) {
+                            final category = categories[index];
 
-                          return ListTile(
-                            title: Text(category.name),
-                            subtitle: Text(category.type.name.capitalize()),
-                            onTap: () {
-                              context.pop();
+                            return ListTile(
+                              title: Text(category.name),
+                              subtitle: Text(category.type.name.capitalize()),
+                              onTap: () {
+                                context.pop();
 
-                              context
-                                  .read<FormTransactionCubit>()
-                                  .setCategory(category);
-                            },
-                          );
-                        },
-                      );
-                    },
-                    failure: (message) {
-                      return Center(
-                        child: Text(message),
-                      );
-                    },
-                  );
-                },
+                                context
+                                    .read<FormTransactionCubit>()
+                                    .setCategory(category);
+                              },
+                            );
+                          },
+                        );
+                      },
+                      failure: (message) {
+                        return Center(
+                          child: Text(message),
+                        );
+                      },
+                    );
+                  },
+                ),
               );
             },
           );

@@ -10,7 +10,9 @@ class CategoryRepositoryImpl implements CategoryRepository {
   @override
   Future<Result<List<Category>>> getCategories() async {
     try {
-      final result = await Supabase.instance.client.from('categories').select();
+      final result = await Supabase.instance.client
+          .from('categories')
+          .select('id, name, code, type');
 
       return Result.success(
         result
