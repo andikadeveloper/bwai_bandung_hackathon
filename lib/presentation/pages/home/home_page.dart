@@ -1,7 +1,8 @@
 import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
+
+import 'widgets/add_transaction_section.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -37,16 +38,7 @@ class HomePage extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final content = [
-            Content.text('Hello, how are you?'),
-          ];
-
-          context.read<HomeCubit>().generateContent(content);
-        },
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: const AddTransactionSection(),
     );
   }
 }
