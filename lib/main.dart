@@ -1,7 +1,13 @@
-import 'package:bwai_bandung_hackathon/home_page.dart';
+import 'package:bwai_bandung_hackathon/core/routes/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'core/di/injectable.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: '.env');
+  configureDependencies();
   runApp(const MyApp());
 }
 
@@ -10,13 +16,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Build with AI Bandung Hackathon',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      routerConfig: router,
     );
   }
 }
