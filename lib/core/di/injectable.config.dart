@@ -32,10 +32,12 @@ import 'package:bwai_bandung_hackathon/domain/usecases/create_generative_content
     as _i12;
 import 'package:bwai_bandung_hackathon/domain/usecases/create_recommendation.dart'
     as _i20;
+import 'package:bwai_bandung_hackathon/domain/usecases/get_account_balance.dart'
+    as _i24;
 import 'package:bwai_bandung_hackathon/domain/usecases/get_all_transactions.dart'
     as _i14;
 import 'package:bwai_bandung_hackathon/domain/usecases/get_categories.dart'
-    as _i25;
+    as _i26;
 import 'package:bwai_bandung_hackathon/domain/usecases/get_default_category.dart'
     as _i23;
 import 'package:bwai_bandung_hackathon/domain/usecases/get_transaction_by_id.dart'
@@ -44,18 +46,20 @@ import 'package:bwai_bandung_hackathon/domain/usecases/get_user.dart' as _i18;
 import 'package:bwai_bandung_hackathon/domain/usecases/sign_in.dart' as _i19;
 import 'package:bwai_bandung_hackathon/domain/usecases/upsert_transaction.dart'
     as _i21;
+import 'package:bwai_bandung_hackathon/presentation/cubit/account/account_cubit.dart'
+    as _i29;
 import 'package:bwai_bandung_hackathon/presentation/cubit/category/category_cubit.dart'
-    as _i26;
-import 'package:bwai_bandung_hackathon/presentation/cubit/form_transaction/form_transaction_cubit.dart'
     as _i27;
+import 'package:bwai_bandung_hackathon/presentation/cubit/form_transaction/form_transaction_cubit.dart'
+    as _i28;
 import 'package:bwai_bandung_hackathon/presentation/cubit/transaction/transaction_cubit.dart'
     as _i15;
 import 'package:bwai_bandung_hackathon/presentation/cubit/user/user_cubit.dart'
     as _i22;
 import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.dart'
-    as _i24;
+    as _i25;
 import 'package:bwai_bandung_hackathon/presentation/pages/recommendation/cubit/recommendation_cubit.dart'
-    as _i28;
+    as _i30;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_generative_ai/google_generative_ai.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
@@ -103,21 +107,25 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i22.UserCubit>(() => _i22.UserCubit(gh<_i18.GetUserUseCase>()));
     gh.factory<_i23.GetDefaultCategory>(
         () => _i23.GetDefaultCategory(gh<_i6.CategoryRepository>()));
-    gh.factory<_i24.HomeCubit>(() => _i24.HomeCubit(
+    gh.factory<_i24.GetAccountBalance>(
+        () => _i24.GetAccountBalance(gh<_i16.AccountRepository>()));
+    gh.factory<_i25.HomeCubit>(() => _i25.HomeCubit(
           gh<_i18.GetUserUseCase>(),
           gh<_i19.SignInUseCase>(),
         ));
-    gh.factory<_i25.GetCategories>(
-        () => _i25.GetCategories(gh<_i6.CategoryRepository>()));
-    gh.factory<_i26.CategoryCubit>(
-        () => _i26.CategoryCubit(gh<_i25.GetCategories>()));
-    gh.factory<_i27.FormTransactionCubit>(() => _i27.FormTransactionCubit(
+    gh.factory<_i26.GetCategories>(
+        () => _i26.GetCategories(gh<_i6.CategoryRepository>()));
+    gh.factory<_i27.CategoryCubit>(
+        () => _i27.CategoryCubit(gh<_i26.GetCategories>()));
+    gh.factory<_i28.FormTransactionCubit>(() => _i28.FormTransactionCubit(
           gh<_i21.UpsertTransaction>(),
           gh<_i23.GetDefaultCategory>(),
           gh<_i13.GetTransactionById>(),
         ));
-    gh.factory<_i28.RecommendationCubit>(
-        () => _i28.RecommendationCubit(gh<_i20.CreateRecommendation>()));
+    gh.factory<_i29.AccountCubit>(
+        () => _i29.AccountCubit(gh<_i24.GetAccountBalance>()));
+    gh.factory<_i30.RecommendationCubit>(
+        () => _i30.RecommendationCubit(gh<_i20.CreateRecommendation>()));
     return this;
   }
 }

@@ -1,10 +1,12 @@
+import 'package:bwai_bandung_hackathon/domain/entities/transaction.dart';
+import 'package:bwai_bandung_hackathon/domain/enums/category_type.dart';
+import 'package:bwai_bandung_hackathon/presentation/cubit/account/account_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/cubit/transaction/transaction_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/cubit/user/user_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.dart';
-import 'package:bwai_bandung_hackathon/presentation/routes/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'widgets/upsert_transaction_bottom_sheet/upsert_transaction_bottom_sheet.dart';
 
@@ -86,16 +88,17 @@ class HomePage extends StatelessWidget {
                                 context: context,
                                 isScrollControlled: true,
                                 builder: (context) {
-                                  return UpsertTransactionBottomSheet(transactionId: listTransaction?[index].id,);
+                                  return UpsertTransactionBottomSheet(
+                                    transactionId: listTransaction?[index].id,
+                                  );
                                 },
                               );
                             },
                             child: ListTile(
                               title: Text(
                                   listTransaction?[index].category.name ?? ''),
-                              subtitle: Text(
-                                  listTransaction?[index].amount.toString() ??
-                                      ''),
+                              subtitle: _amountText(
+                                  amount: listTransaction?[index].amount),
                               trailing: const Icon(Icons.chevron_right_rounded),
                             ),
                           );
@@ -167,15 +170,59 @@ class HomePage extends StatelessWidget {
                   isIncome ? 'Income' : 'Expense',
                   textAlign: TextAlign.left,
                 ),
-                const Text(
-                  'Rp 100.000',
-                  textAlign: TextAlign.left,
+                BlocBuilder<TransactionCubit, TransactionState>(
+                  builder: (context, state) {
+                    return state.when(
+                      initial: () => _amountText(),
+                      loading: () => _amountText(),
+                      success: (List<Transaction>? listTransaction) {
+                        if (listTransaction != null) {
+                          int amountIncome = 0, amountExpense = 0;
+                          for (var transaction in listTransaction) {
+                            if (transaction.category.type ==
+                                CategoryType.expense) {
+                              amountExpense += transaction.amount;
+                              continue;
+                            }
+                            amountIncome += transaction.amount;
+                          }
+
+                          if (isIncome) {
+                            return _amountText(amount: amountIncome);
+                          }
+                          return _amountText(amount: amountExpense);
+                        }
+                        return _amountText();
+                      },
+                      failure: (message) => _amountText(),
+                    );
+                  },
                 ),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  String _formatAmount(int amount) {
+    var numberFormat = NumberFormat.decimalPatternDigits(
+      locale: 'ID',
+      decimalDigits: 0,
+    );
+    return numberFormat.format(amount);
+  }
+
+  Widget _amountText({
+    int? amount,
+    TextAlign? textAlign = TextAlign.left,
+    TextStyle? style,
+  }) {
+    return Text(
+      'Rp ${_formatAmount(amount ?? 0)}',
+      textAlign: textAlign,
+      style: style,
     );
   }
 
@@ -191,11 +238,11 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Account Balance',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -203,14 +250,43 @@ class HomePage extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                   ),
                 ),
-                Text(
-                  'Rp 50.0000',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
+                BlocBuilder<AccountCubit, AccountState>(
+                  builder: (context, state) {
+                    return state.when(
+                      initial: () => _amountText(
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      loading: () => _amountText(
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      success: (amount) {
+                        return _amountText(
+                          amount: amount,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      },
+                      failure: (message) => _amountText(
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
             Padding(
