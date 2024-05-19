@@ -8,9 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class CategorySection extends StatelessWidget {
-  const CategorySection({super.key, required this.selectedCategory});
+  const CategorySection({
+    super.key,
+    required this.selectedCategory,
+    this.readOnly = false,
+  });
 
   final Category selectedCategory;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +28,8 @@ class CategorySection extends StatelessWidget {
           color: Colors.deepPurple,
         ),
         onPressed: () {
+          if (readOnly) return;
+
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,

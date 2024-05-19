@@ -65,22 +65,33 @@ class _UpsertTransactionBottomSheetState
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Amount
-                    AmountSection(amount: state.amount),
+                    AmountSection(
+                      amount: state.amount,
+                      readOnly: widget.transactionId != null,
+                    ),
 
                     // Note
-                    NoteSection(note: state.note),
+                    NoteSection(
+                      note: state.note,
+                      readOnly: widget.transactionId != null,
+                    ),
 
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // Category
-                        CategorySection(selectedCategory: state.category),
+                        CategorySection(
+                          selectedCategory: state.category,
+                          readOnly: widget.transactionId != null,
+                        ),
 
                         const SizedBox(width: 8.0),
 
                         // Date
                         DateSection(
-                            selectedTransactionDate: state.transactionDate),
+                          selectedTransactionDate: state.transactionDate,
+                          readOnly: widget.transactionId != null,
+                        ),
                       ],
                     ),
                     const Padding(
@@ -92,9 +103,11 @@ class _UpsertTransactionBottomSheetState
                     Align(
                       alignment: Alignment.centerRight,
                       child: IconButton(
-                        onPressed: context
-                            .read<FormTransactionCubit>()
-                            .upsertTransaction,
+                        onPressed: widget.transactionId != null
+                            ? null
+                            : context
+                                .read<FormTransactionCubit>()
+                                .upsertTransaction,
                         icon: const Icon(Icons.send),
                         color: Colors.deepPurple,
                       ),

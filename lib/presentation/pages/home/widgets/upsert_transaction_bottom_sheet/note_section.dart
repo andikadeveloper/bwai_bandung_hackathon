@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NoteSection extends StatefulWidget {
-  const NoteSection({super.key, this.note});
+  const NoteSection({
+    super.key,
+    this.note,
+    this.readOnly = false,
+  });
 
   final String? note;
+  final bool readOnly;
 
   @override
   State<NoteSection> createState() => _NoteSectionState();
@@ -31,6 +36,7 @@ class _NoteSectionState extends State<NoteSection> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      readOnly: widget.readOnly,
       controller: noteController,
       onChanged: context.read<FormTransactionCubit>().setNote,
       style: Theme.of(context).textTheme.titleMedium,

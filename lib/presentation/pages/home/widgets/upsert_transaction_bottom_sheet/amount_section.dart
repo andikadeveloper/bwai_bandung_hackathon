@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AmountSection extends StatefulWidget {
-  const AmountSection({super.key, this.amount});
+  const AmountSection({
+    super.key,
+    this.amount,
+    this.readOnly = false,
+  });
 
   final int? amount;
+  final bool readOnly;
 
   @override
   State<AmountSection> createState() => _AmountSectionState();
@@ -41,6 +46,7 @@ class _AmountSectionState extends State<AmountSection> {
         const SizedBox(width: 8.0),
         Expanded(
           child: TextField(
+            readOnly: widget.readOnly,
             controller: amountController,
             onChanged: (value) {
               final amount = int.tryParse(value);

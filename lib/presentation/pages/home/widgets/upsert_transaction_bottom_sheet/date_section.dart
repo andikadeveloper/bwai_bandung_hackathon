@@ -8,9 +8,11 @@ class DateSection extends StatelessWidget {
   const DateSection({
     super.key,
     required this.selectedTransactionDate,
+    this.readOnly = false,
   });
 
   final DateTime selectedTransactionDate;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,8 @@ class DateSection extends StatelessWidget {
           Icons.calendar_month,
         ),
         onPressed: () {
+          if (readOnly) return;
+
           showDatePicker(
             context: context,
             initialDate: DateTime.now(),
