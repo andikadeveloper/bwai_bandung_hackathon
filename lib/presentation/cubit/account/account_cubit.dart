@@ -13,10 +13,10 @@ class AccountCubit extends Cubit<AccountState> {
   AccountCubit(
     this.getAccountBalance,
   ) : super(const AccountState.initial()) {
-    _getAccountBalance();
+    getAccount();
   }
 
-  Future<void> _getAccountBalance() async {
+  Future<void> getAccount() async {
     var result = await getAccountBalance();
     result.when(
       success: (value) {},

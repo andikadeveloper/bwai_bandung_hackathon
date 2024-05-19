@@ -1,5 +1,8 @@
+import 'package:bwai_bandung_hackathon/presentation/cubit/account/account_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/cubit/category/category_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/cubit/form_transaction/form_transaction_cubit.dart';
+import 'package:bwai_bandung_hackathon/presentation/cubit/transaction/transaction_cubit.dart';
+import 'package:bwai_bandung_hackathon/presentation/cubit/user/user_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/routes/router.dart';
 import 'package:bwai_bandung_hackathon/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +35,15 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt.get<FormTransactionCubit>()),
         BlocProvider(create: (_) => getIt.get<CategoryCubit>()),
+        BlocProvider(
+          create: (context) => getIt.get<UserCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt.get<TransactionCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt.get<AccountCubit>(),
+        ),
       ],
       child: MaterialApp.router(
         title: 'Build with AI Bandung Hackathon',

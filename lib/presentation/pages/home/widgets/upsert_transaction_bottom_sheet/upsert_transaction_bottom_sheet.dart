@@ -1,4 +1,6 @@
+import 'package:bwai_bandung_hackathon/presentation/cubit/account/account_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/cubit/form_transaction/form_transaction_cubit.dart';
+import 'package:bwai_bandung_hackathon/presentation/cubit/transaction/transaction_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/upsert_transaction_bottom_sheet/amount_section.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/upsert_transaction_bottom_sheet/category_section.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/upsert_transaction_bottom_sheet/date_section.dart';
@@ -46,6 +48,8 @@ class _UpsertTransactionBottomSheetState
             previous.isSuccess != current.isSuccess,
         listener: (context, state) {
           if (state.isSuccess) {
+            context.read<AccountCubit>().getAccount();
+            context.read<TransactionCubit>().getAll();
             context.pop();
           }
         },

@@ -1,7 +1,4 @@
 import 'package:bwai_bandung_hackathon/core/di/injectable.dart';
-import 'package:bwai_bandung_hackathon/presentation/cubit/account/account_cubit.dart';
-import 'package:bwai_bandung_hackathon/presentation/cubit/transaction/transaction_cubit.dart';
-import 'package:bwai_bandung_hackathon/presentation/cubit/user/user_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/home/home_page.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/recommendation/cubit/recommendation_cubit.dart';
@@ -14,21 +11,8 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: PathRoute.home,
-      builder: (context, state) => MultiBlocProvider(
-        providers: [
-          BlocProvider<HomeCubit>(
-            create: (context) => getIt.get<HomeCubit>(),
-          ),
-          BlocProvider<UserCubit>(
-            create: (context) => getIt.get<UserCubit>(),
-          ),
-          BlocProvider<TransactionCubit>(
-            create: (context) => getIt.get<TransactionCubit>(),
-          ),
-          BlocProvider<AccountCubit>(
-            create: (context) => getIt.get<AccountCubit>(),
-          ),
-        ],
+      builder: (context, state) => BlocProvider<HomeCubit>(
+        create: (context) => getIt.get<HomeCubit>(),
         child: const HomePage(),
       ),
     ),
