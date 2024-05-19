@@ -295,9 +295,16 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //income
-                  _boxIncomeExpense(isIncome: true),
+                  Expanded(
+                    child: _boxIncomeExpense(isIncome: true),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
                   //expense
-                  _boxIncomeExpense(isIncome: false),
+                  Expanded(
+                    child: _boxIncomeExpense(isIncome: false),
+                  ),
                 ],
               ),
             ),
