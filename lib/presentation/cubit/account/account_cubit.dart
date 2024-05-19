@@ -19,8 +19,12 @@ class AccountCubit extends Cubit<AccountState> {
   Future<void> getAccount() async {
     var result = await getAccountBalance();
     result.when(
-      success: (value) {},
-      failure: (message) {},
+      success: (value) {
+        emit(AccountState.success(value));
+      },
+      failure: (message) {
+        emit(AccountState.failure(message));
+      },
     );
   }
 }
