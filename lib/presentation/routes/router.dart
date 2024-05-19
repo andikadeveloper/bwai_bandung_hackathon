@@ -3,8 +3,6 @@ import 'package:bwai_bandung_hackathon/presentation/cubit/transaction/transactio
 import 'package:bwai_bandung_hackathon/presentation/cubit/user/user_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/home/home_page.dart';
-import 'package:bwai_bandung_hackathon/presentation/pages/login/cubit/login_cubit.dart';
-import 'package:bwai_bandung_hackathon/presentation/pages/login/login_page.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/profile/cubit/profile_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/profile/profile_page.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/recommendation/cubit/recommendation_cubit.dart';
@@ -37,13 +35,6 @@ final router = GoRouter(
       builder: (context, state) => BlocProvider(
         create: (context) => getIt.get<ProfileCubit>(),
         child: const ProfilePage(),
-      ),
-    ),
-    GoRoute(
-      path: PathRoute.login,
-      builder: (context, state) => BlocProvider(
-        create: (context) => getIt.get<LoginCubit>(),
-        child: const LoginPage(),
       ),
     ),
     GoRoute(
