@@ -1,9 +1,11 @@
 import 'package:bwai_bandung_hackathon/core/result/result.dart';
 import 'package:bwai_bandung_hackathon/domain/usecases/get_user.dart';
 import 'package:bwai_bandung_hackathon/domain/usecases/sign_in.dart';
+import 'package:bwai_bandung_hackathon/presentation/routes/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
