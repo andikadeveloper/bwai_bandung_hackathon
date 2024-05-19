@@ -14,14 +14,16 @@ class HomePage extends StatelessWidget {
         title: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             return state.when(
-              initial: () => const Text('Hi, User👋'),
-              loading: () => const Text('Hi, User👋'),
-              success: (value) => const Text('Hi, User👋'),
-              failure: (message) => const Text('Hi, User👋'),
-              successGetUserApi: (user) =>
-                  Text('Hi, ${user?.user?.userMetadata?['name'] ?? 'User'}👋'),
-              successGetUserSession: (user) =>
-                  Text('Hi, ${user?.user?.userMetadata?['name'] ?? 'User'}👋'),
+              initial: () => _defaultWelcome(),
+              loading: () => _defaultWelcome(),
+              success: (value) => _defaultWelcome(),
+              failure: (message) => _defaultWelcome(),
+              successGetUserApi: (user) => _specificWelcome(
+                name: user?.user?.userMetadata?['name'] ?? 'User',
+              ),
+              successGetUserSession: (user) => _specificWelcome(
+                name: user?.user?.userMetadata?['name'] ?? 'User',
+              ),
             );
           },
         ),
@@ -36,27 +38,15 @@ class HomePage extends StatelessWidget {
             child: BlocBuilder<HomeCubit, HomeState>(
               builder: (context, state) {
                 return state.when(
-                  initial: () => const CircleAvatar(
-                    child: Text('U'),
+                  initial: () => _defaultAvatar(),
+                  loading: () => _defaultAvatar(),
+                  success: (value) => _defaultAvatar(),
+                  failure: (message) => _defaultAvatar(),
+                  successGetUserApi: (user) => _specificAvatar(
+                    url: user?.user?.userMetadata?['avatar_url'],
                   ),
-                  loading: () => const CircleAvatar(
-                    child: Text('U'),
-                  ),
-                  success: (value) => const CircleAvatar(
-                    child: Text('U'),
-                  ),
-                  failure: (message) => const CircleAvatar(
-                    child: Text('U'),
-                  ),
-                  successGetUserApi: (user) => CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      user?.user?.userMetadata?['avatar_url'],
-                    ),
-                  ),
-                  successGetUserSession: (user) => CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      user?.user?.userMetadata?['avatar_url'],
-                    ),
+                  successGetUserSession: (user) => _specificAvatar(
+                    url: user?.user?.userMetadata?['avatar_url'],
                   ),
                 );
               },
@@ -65,25 +55,58 @@ class HomePage extends StatelessWidget {
         ),
         leadingWidth: 72.0,
       ),
-      body: Center(
-        child: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) {
-            return state.when(
-              initial: () => const Text('Hi, welcome to the home page'),
-              loading: () => const CircularProgressIndicator(),
-              failure: (message) => Text(message),
-              success: (data) {
-                return Text(data.text ?? '');
-              },
-              successGetUserApi: (user) {
-                return const Text('Hi, welcome to the home page');
-              },
-              successGetUserSession: (user) {
-                return const Text('Hi, welcome to the home page');
-              },
-            );
-          },
-        ),
+      body: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              color: Colors.deepPurple[50],
+            ),
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                children: [
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Account Balance',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      Text(
+                        'Rp 50.0000',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //income
+                        _boxIncomeExpense(isIncome: true),
+                        //expense
+                        _boxIncomeExpense(isIncome: false),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -96,6 +119,62 @@ class HomePage extends StatelessWidget {
             },
           );
         },
+      ),
+    );
+  }
+
+  Widget _defaultWelcome() => const Text('Hi, User👋');
+
+  Widget _specificWelcome({required String name}) => Text('Hi, $name👋');
+
+  Widget _defaultAvatar() {
+    return const CircleAvatar(
+      child: Text('U'),
+    );
+  }
+
+  Widget _specificAvatar({String? url}) {
+    if (url == null || url.isEmpty) {
+      return _defaultAvatar();
+    }
+
+    return CircleAvatar(
+      backgroundImage: NetworkImage(
+        url,
+      ),
+    );
+  }
+
+  Widget _boxIncomeExpense({required bool isIncome}) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        color: isIncome ? Colors.green[200] : Colors.redAccent[200],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Icon(isIncome ? Icons.input : Icons.output),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  isIncome ? 'Income' : 'Expense',
+                  textAlign: TextAlign.left,
+                ),
+                const Text(
+                  'Rp 100.000',
+                  textAlign: TextAlign.left,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
