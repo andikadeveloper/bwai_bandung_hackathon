@@ -55,7 +55,8 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: GestureDetector(
-              onTap: () => context.push(PathRoute.recommendation),
+              onTap: () =>
+                  context.read<HomeCubit>().goToRecommendationOrLogin(context),
               child: Lottie.asset(
                 'assets/animations/animation-ai.json',
                 width: 50,
@@ -73,8 +74,8 @@ class HomePage extends StatelessWidget {
                 return state.when(
                     initial: () => const SizedBox(),
                     loading: () => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                          child: CircularProgressIndicator(),
+                        ),
                     success: (listTransaction) {
                       return ListView.builder(
                         itemCount: listTransaction?.length,
@@ -84,8 +85,11 @@ class HomePage extends StatelessWidget {
                               debugPrint('clicked on index $index');
                             },
                             child: ListTile(
-                              title: Text(listTransaction?[index].category.name ?? ''),
-                              subtitle: Text(listTransaction?[index].amount.toString() ?? ''),
+                              title: Text(
+                                  listTransaction?[index].category.name ?? ''),
+                              subtitle: Text(
+                                  listTransaction?[index].amount.toString() ??
+                                      ''),
                               trailing: const Icon(Icons.chevron_right_rounded),
                             ),
                           );

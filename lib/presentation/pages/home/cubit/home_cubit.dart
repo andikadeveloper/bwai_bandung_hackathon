@@ -43,4 +43,16 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+  Future<void> goToRecommendationOrLogin(BuildContext context) async {
+    final result = await getUserUseCase();
+    result.when(
+      success: (value) {
+        context.push(PathRoute.recommendation);
+      },
+      failure: (message) {
+        _toLogin(context);
+      },
+    );
+  }
 }
