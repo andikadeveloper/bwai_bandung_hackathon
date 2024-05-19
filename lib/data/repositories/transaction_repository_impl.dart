@@ -67,4 +67,32 @@ class TransactionRepositoryImpl implements TransactionRepository {
       return Result.failure(e.toString());
     }
   }
+
+  @override
+  Future<Result<List<Transaction>>> getTransactions({
+    required startDate,
+    required endDate,
+  }) async {
+    try {
+      final userId = Supabase.instance.client.auth.currentUser?.id;
+
+      if (userId == null) return const Result.failure('User not found');
+
+      final result = await Supabase.instance.client
+          .from('transactions')
+          .select(
+            'id, user_id, transaction_date, amount, note, category:category_id(id, name, code, type)',
+          )
+          .eq('user_id', userId)
+          // filter data between startDate and endDate
+          .gte('transaction_date', startDate.toIso8601String())
+          .lte('transaction_date', endDate.toIso8601String());
+
+      return Result.success(
+        result.map((e) => TransactionModel.fromJson(e).toEntity()).toList(),
+      );
+    } catch (e) {
+      return Result.failure(e.toString());
+    }
+  }
 }

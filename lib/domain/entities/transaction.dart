@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class Transaction extends Equatable {
   final int id;
   final Category category;
-  final int userId;
+  final String userId;
   final int amount;
   final String note;
   final DateTime transactionDate;

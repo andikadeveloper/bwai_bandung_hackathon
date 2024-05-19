@@ -4,7 +4,7 @@ import 'package:bwai_bandung_hackathon/domain/entities/transaction.dart';
 class TransactionModel {
   final int? id;
   final CategoryModel? category;
-  final int? userId;
+  final String? userId;
   final int? amount;
   final String? note;
   final DateTime? transactionDate;
@@ -46,7 +46,7 @@ class TransactionModel {
     return Transaction(
       id: id ?? 0,
       category: categoryModel.toEntity(),
-      userId: userId ?? 0,
+      userId: userId ?? '',
       amount: amount ?? 0,
       note: note ?? '',
       transactionDate: transactionDate ?? DateTime.now(),

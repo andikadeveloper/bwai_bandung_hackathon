@@ -18,4 +18,9 @@ abstract class TransactionRepository {
   });
 
   Future<Result<Transaction>> getById(int id);
+
+  Future<Result<List<Transaction>>> getTransactions({
+    required DateTime startDate,
+    required DateTime endDate,
+  });
 }
