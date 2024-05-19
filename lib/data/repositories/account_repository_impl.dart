@@ -39,4 +39,20 @@ class AccountRepositoryImpl implements AccountRepository {
       return Result.failure(e.toString());
     }
   }
+  
+  @override
+  Future<Result<bool>> createAccount() async {
+    try {
+      final userId = Supabase.instance.client.auth.currentUser?.id;
+      if (userId == null) return const Result.failure('User not found');
+
+      await Supabase.instance.client
+          .from('accounts')
+          .upsert({ 'user_id': userId });
+
+      return const Result.success(true);
+    } catch (e) {
+      return Result.failure(e.toString());
+    }
+  }
 }
