@@ -31,7 +31,6 @@ class HomeCubit extends Cubit<HomeState> {
         emit(HomeState.successGetUserSession(value));
       },
       failure: (message) {
-        emit(HomeState.failure(message));
       },
     );
   }
