@@ -16,6 +16,7 @@ class TransactionRepositoryImpl implements TransactionRepository {
   }) async {
     try {
       await Supabase.instance.client.from('transactions').insert({
+        'user_id': Supabase.instance.client.auth.currentUser?.id,
         'amount': amount,
         'note': note,
         'category_id': categoryId,
