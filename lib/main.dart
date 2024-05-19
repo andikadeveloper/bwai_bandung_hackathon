@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
         title: 'Build with AI Bandung Hackathon',
         theme: theme,
         routerConfig: router,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
