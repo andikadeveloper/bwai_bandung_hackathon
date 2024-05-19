@@ -77,7 +77,7 @@ class FormTransactionCubit extends Cubit<FormTransactionState> {
       id: state.id,
       amount: state.amount,
       note: state.note,
-      categoryId: state.category.id,
+      category: state.category,
       transactionDate: state.transactionDate,
     );
 
