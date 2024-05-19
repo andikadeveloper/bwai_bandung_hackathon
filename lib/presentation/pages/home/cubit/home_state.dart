@@ -6,4 +6,6 @@ class HomeState with _$HomeState {
   const factory HomeState.loading() = _Loading;
   const factory HomeState.success(GenerateContentResponse value) = _Success;
   const factory HomeState.failure(String message) = _Failure;
+  const factory HomeState.successGetUserApi(AuthResponse? user) = _SuccessGetUserApi;
+  const factory HomeState.successGetUserSession(UserResponse? user) = _SuccessGetUserSession;
 }
