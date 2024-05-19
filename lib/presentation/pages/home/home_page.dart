@@ -81,7 +81,13 @@ class HomePage extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              debugPrint('clicked on index $index');
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (context) {
+                                  return UpsertTransactionBottomSheet(transactionId: listTransaction?[index].id,);
+                                },
+                              );
                             },
                             child: ListTile(
                               title: Text(listTransaction?[index].category.name ?? ''),
