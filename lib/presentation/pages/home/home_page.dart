@@ -14,14 +14,16 @@ class HomePage extends StatelessWidget {
         title: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             return state.when(
-              initial: () => const Text('Hi, User👋'),
-              loading: () => const Text('Hi, User👋'),
-              success: (value) => const Text('Hi, User👋'),
-              failure: (message) => const Text('Hi, User👋'),
-              successGetUserApi: (user) =>
-                  Text('Hi, ${user?.user?.userMetadata?['name'] ?? 'User'}👋'),
-              successGetUserSession: (user) =>
-                  Text('Hi, ${user?.user?.userMetadata?['name'] ?? 'User'}👋'),
+              initial: () => _defaultWelcome(),
+              loading: () => _defaultWelcome(),
+              success: (value) => _defaultWelcome(),
+              failure: (message) => _defaultWelcome(),
+              successGetUserApi: (user) => _specificWelcome(
+                name: user?.user?.userMetadata?['name'] ?? 'User',
+              ),
+              successGetUserSession: (user) => _specificWelcome(
+                name: user?.user?.userMetadata?['name'] ?? 'User',
+              ),
             );
           },
         ),
@@ -36,27 +38,15 @@ class HomePage extends StatelessWidget {
             child: BlocBuilder<HomeCubit, HomeState>(
               builder: (context, state) {
                 return state.when(
-                  initial: () => const CircleAvatar(
-                    child: Text('U'),
+                  initial: () => _defaultAvatar(),
+                  loading: () => _defaultAvatar(),
+                  success: (value) => _defaultAvatar(),
+                  failure: (message) => _defaultAvatar(),
+                  successGetUserApi: (user) => _specificAvatar(
+                    url: user?.user?.userMetadata?['avatar_url'],
                   ),
-                  loading: () => const CircleAvatar(
-                    child: Text('U'),
-                  ),
-                  success: (value) => const CircleAvatar(
-                    child: Text('U'),
-                  ),
-                  failure: (message) => const CircleAvatar(
-                    child: Text('U'),
-                  ),
-                  successGetUserApi: (user) => CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      user?.user?.userMetadata?['avatar_url'],
-                    ),
-                  ),
-                  successGetUserSession: (user) => CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      user?.user?.userMetadata?['avatar_url'],
-                    ),
+                  successGetUserSession: (user) => _specificAvatar(
+                    url: user?.user?.userMetadata?['avatar_url'],
                   ),
                 );
               },
@@ -71,7 +61,10 @@ class HomePage extends StatelessWidget {
             return state.when(
               initial: () => const Text('Hi, welcome to the home page'),
               loading: () => const CircularProgressIndicator(),
-              failure: (message) => Text(message),
+              failure: (message) => Text(
+                message,
+                textAlign: TextAlign.center,
+              ),
               success: (data) {
                 return Text(data.text ?? '');
               },
@@ -96,6 +89,28 @@ class HomePage extends StatelessWidget {
             },
           );
         },
+      ),
+    );
+  }
+
+  Widget _defaultWelcome() => const Text('Hi, User👋');
+
+  Widget _specificWelcome({required String name}) => Text('Hi, $name👋');
+
+  Widget _defaultAvatar() {
+    return const CircleAvatar(
+      child: Text('U'),
+    );
+  }
+
+  Widget _specificAvatar({String? url}) {
+    if (url == null || url.isEmpty) {
+      return _defaultAvatar();
+    }
+
+    return CircleAvatar(
+      backgroundImage: NetworkImage(
+        url,
       ),
     );
   }
