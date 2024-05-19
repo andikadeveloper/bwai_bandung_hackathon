@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'widgets/upsert_transaction_bottom_sheet/upsert_transaction_bottom_sheet.dart';
 
 class HomePage extends StatelessWidget {
@@ -115,6 +116,10 @@ class HomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () async {
+          if (Supabase.instance.client.auth.currentSession == null) {
+            context.read<HomeCubit>().login(context);
+            return;
+          }
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,

@@ -60,4 +60,8 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+  void login(BuildContext context) {
+    _toLogin(context);
+  }
 }
