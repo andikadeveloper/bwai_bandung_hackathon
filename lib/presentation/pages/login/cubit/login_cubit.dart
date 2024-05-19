@@ -21,7 +21,8 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> loginWithGoogle(BuildContext context) async {
     emit(const LoginState.loading());
 
-    Result<AuthResponse> result = await signInUseCase(provider: OAuthProvider.google);
+    Result<AuthResponse> result =
+        await signInUseCase(provider: OAuthProvider.google);
 
     result.when(
       success: (value) {
