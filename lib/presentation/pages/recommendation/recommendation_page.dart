@@ -20,7 +20,7 @@ class RecommendationPage extends StatelessWidget {
                 initial: () =>
                     const Text('Generate your financial recommendation'),
                 loading: () => Container(
-                  height: MediaQuery.of(context).size.height,
+                  height: MediaQuery.of(context).size.height * 0.8,
                   alignment: Alignment.center,
                   child: Lottie.asset(
                     'assets/animations/animation-gemini.json',
@@ -38,7 +38,21 @@ class RecommendationPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                failure: (message) => Text(message),
+                failure: (message) => Container(
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/finance-pie.png', width: 200),
+                      const SizedBox(height: 20),
+                      const MarkdownBody(
+                        data: 'There is no financial recommendation for now',
+                      ),
+                    ],
+                  ),
+                ),
               );
             },
           ),

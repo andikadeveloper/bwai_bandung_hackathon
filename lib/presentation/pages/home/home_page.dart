@@ -1,6 +1,9 @@
 import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.dart';
+import 'package:bwai_bandung_hackathon/presentation/routes/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'widgets/upsert_transaction_bottom_sheet/upsert_transaction_bottom_sheet.dart';
 
 class HomePage extends StatelessWidget {
@@ -54,6 +57,18 @@ class HomePage extends StatelessWidget {
           ),
         ),
         leadingWidth: 72.0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: GestureDetector(
+              onTap: () => context.push(PathRoute.recommendation),
+              child: Lottie.asset(
+                'assets/animations/animation-ai.json',
+                width: 50,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -91,7 +106,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 12),
+                    padding: const EdgeInsets.only(top: 12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
