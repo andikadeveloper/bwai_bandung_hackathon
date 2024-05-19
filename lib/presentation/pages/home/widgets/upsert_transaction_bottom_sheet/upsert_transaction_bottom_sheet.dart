@@ -1,14 +1,14 @@
 import 'package:bwai_bandung_hackathon/presentation/cubit/form_transaction/form_transaction_cubit.dart';
-import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/add_transaction_bottom_sheet/amount_section.dart';
-import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/add_transaction_bottom_sheet/category_section.dart';
-import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/add_transaction_bottom_sheet/date_section.dart';
-import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/add_transaction_bottom_sheet/note_section.dart';
+import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/upsert_transaction_bottom_sheet/amount_section.dart';
+import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/upsert_transaction_bottom_sheet/category_section.dart';
+import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/upsert_transaction_bottom_sheet/date_section.dart';
+import 'package:bwai_bandung_hackathon/presentation/pages/home/widgets/upsert_transaction_bottom_sheet/note_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class AddTransactionBottomSheet extends StatefulWidget {
-  const AddTransactionBottomSheet({
+class UpsertTransactionBottomSheet extends StatefulWidget {
+  const UpsertTransactionBottomSheet({
     super.key,
     this.transactionId,
   });
@@ -16,11 +16,12 @@ class AddTransactionBottomSheet extends StatefulWidget {
   final int? transactionId;
 
   @override
-  State<AddTransactionBottomSheet> createState() =>
-      _AddTransactionBottomSheetState();
+  State<UpsertTransactionBottomSheet> createState() =>
+      _UpsertTransactionBottomSheetState();
 }
 
-class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
+class _UpsertTransactionBottomSheetState
+    extends State<UpsertTransactionBottomSheet> {
   @override
   void initState() {
     super.initState();

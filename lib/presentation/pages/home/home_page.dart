@@ -1,7 +1,7 @@
 import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'widgets/add_transaction_bottom_sheet/add_transaction_bottom_sheet.dart';
+import 'widgets/upsert_transaction_bottom_sheet/upsert_transaction_bottom_sheet.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
             context: context,
             isScrollControlled: true,
             builder: (context) {
-              return const AddTransactionBottomSheet();
+              return const UpsertTransactionBottomSheet();
             },
           );
         },
