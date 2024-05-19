@@ -1,46 +1,30 @@
+import 'package:bwai_bandung_hackathon/presentation/cubit/transaction/transaction_cubit.dart';
+import 'package:bwai_bandung_hackathon/presentation/cubit/user/user_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/pages/home/cubit/home_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/routes/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'widgets/upsert_transaction_bottom_sheet/upsert_transaction_bottom_sheet.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
-  final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
-
-  void _onRefresh() async {
-    _refreshController.refreshCompleted();
-  }
-
-  void _onLoading() async {
-    _refreshController.loadComplete();
-  }
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var items = List<String>.generate(20, (i) => 'Item $i');
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: BlocBuilder<HomeCubit, HomeState>(
+        title: BlocBuilder<UserCubit, UserState>(
           builder: (context, state) {
             return state.when(
               initial: () => _defaultWelcome(),
               loading: () => _defaultWelcome(),
-              success: (value) => _defaultWelcome(),
+              success: (user) => _specificWelcome(
+                name: user?.user?.userMetadata?['name'] ?? 'User',
+              ),
               failure: (message) => _defaultWelcome(),
-              successGetUserApi: (user) => _specificWelcome(
-                name: user?.user?.userMetadata?['name'] ?? 'User',
-              ),
-              successGetUserSession: (user) => _specificWelcome(
-                name: user?.user?.userMetadata?['name'] ?? 'User',
-              ),
             );
           },
         ),
@@ -52,19 +36,15 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 16),
           child: GestureDetector(
             onTap: () => context.read<HomeCubit>().goToProfileOrLogin(context),
-            child: BlocBuilder<HomeCubit, HomeState>(
+            child: BlocBuilder<UserCubit, UserState>(
               builder: (context, state) {
                 return state.when(
                   initial: () => _defaultAvatar(),
                   loading: () => _defaultAvatar(),
-                  success: (value) => _defaultAvatar(),
+                  success: (user) => _specificAvatar(
+                    url: user?.user?.userMetadata?['avatar_url'],
+                  ),
                   failure: (message) => _defaultAvatar(),
-                  successGetUserApi: (user) => _specificAvatar(
-                    url: user?.user?.userMetadata?['avatar_url'],
-                  ),
-                  successGetUserSession: (user) => _specificAvatar(
-                    url: user?.user?.userMetadata?['avatar_url'],
-                  ),
                 );
               },
             ),
@@ -88,27 +68,32 @@ class HomePage extends StatelessWidget {
         children: [
           _detailHeaderSection(),
           Expanded(
-            child: SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: true,
-              controller: _refreshController,
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
-              child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      debugPrint('clicked on index $index');
-                    },
-                    child: const ListTile(
-                      title: Text('Food & Beverages'),
-                      subtitle: Text('Rp 42.000'),
-                      trailing: Icon(Icons.chevron_right_rounded),
+            child: BlocBuilder<TransactionCubit, TransactionState>(
+              builder: (context, state) {
+                return state.when(
+                    initial: () => const SizedBox(),
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(),
                     ),
-                  );
-                },
-              ),
+                    success: (listTransaction) {
+                      return ListView.builder(
+                        itemCount: listTransaction?.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              debugPrint('clicked on index $index');
+                            },
+                            child: ListTile(
+                              title: Text(listTransaction?[index].category.name ?? ''),
+                              subtitle: Text(listTransaction?[index].amount.toString() ?? ''),
+                              trailing: const Icon(Icons.chevron_right_rounded),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    failure: (mesaage) => const SizedBox());
+              },
             ),
           ),
         ],
