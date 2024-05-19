@@ -20,7 +20,7 @@ mixin _$ProfileState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GenerateContentResponse value) success,
+    required TResult Function(UserResponse? user) success,
     required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$ProfileState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GenerateContentResponse value)? success,
+    TResult? Function(UserResponse? user)? success,
     TResult? Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$ProfileState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GenerateContentResponse value)? success,
+    TResult Function(UserResponse? user)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
@@ -126,7 +126,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GenerateContentResponse value) success,
+    required TResult Function(UserResponse? user) success,
     required TResult Function(String message) failure,
   }) {
     return initial();
@@ -137,7 +137,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GenerateContentResponse value)? success,
+    TResult? Function(UserResponse? user)? success,
     TResult? Function(String message)? failure,
   }) {
     return initial?.call();
@@ -148,7 +148,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GenerateContentResponse value)? success,
+    TResult Function(UserResponse? user)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -240,7 +240,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GenerateContentResponse value) success,
+    required TResult Function(UserResponse? user) success,
     required TResult Function(String message) failure,
   }) {
     return loading();
@@ -251,7 +251,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GenerateContentResponse value)? success,
+    TResult? Function(UserResponse? user)? success,
     TResult? Function(String message)? failure,
   }) {
     return loading?.call();
@@ -262,7 +262,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GenerateContentResponse value)? success,
+    TResult Function(UserResponse? user)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -320,7 +320,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({GenerateContentResponse value});
+  $Res call({UserResponse? user});
 }
 
 /// @nodoc
@@ -334,13 +334,13 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? value = null,
+    Object? user = freezed,
   }) {
     return _then(_$SuccessImpl(
-      null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as GenerateContentResponse,
+      freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserResponse?,
     ));
   }
 }
@@ -348,14 +348,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(this.value);
+  const _$SuccessImpl(this.user);
 
   @override
-  final GenerateContentResponse value;
+  final UserResponse? user;
 
   @override
   String toString() {
-    return 'ProfileState.success(value: $value)';
+    return 'ProfileState.success(user: $user)';
   }
 
   @override
@@ -363,11 +363,11 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value);
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
@@ -380,10 +380,10 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GenerateContentResponse value) success,
+    required TResult Function(UserResponse? user) success,
     required TResult Function(String message) failure,
   }) {
-    return success(value);
+    return success(user);
   }
 
   @override
@@ -391,10 +391,10 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GenerateContentResponse value)? success,
+    TResult? Function(UserResponse? user)? success,
     TResult? Function(String message)? failure,
   }) {
-    return success?.call(value);
+    return success?.call(user);
   }
 
   @override
@@ -402,12 +402,12 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GenerateContentResponse value)? success,
+    TResult Function(UserResponse? user)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(value);
+      return success(user);
     }
     return orElse();
   }
@@ -451,9 +451,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements ProfileState {
-  const factory _Success(final GenerateContentResponse value) = _$SuccessImpl;
+  const factory _Success(final UserResponse? user) = _$SuccessImpl;
 
-  GenerateContentResponse get value;
+  UserResponse? get user;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -525,7 +525,7 @@ class _$FailureImpl implements _Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GenerateContentResponse value) success,
+    required TResult Function(UserResponse? user) success,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -536,7 +536,7 @@ class _$FailureImpl implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GenerateContentResponse value)? success,
+    TResult? Function(UserResponse? user)? success,
     TResult? Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -547,7 +547,7 @@ class _$FailureImpl implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GenerateContentResponse value)? success,
+    TResult Function(UserResponse? user)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
