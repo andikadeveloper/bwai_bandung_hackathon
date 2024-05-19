@@ -4,13 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'widgets/upsert_transaction_bottom_sheet/upsert_transaction_bottom_sheet.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    _refreshController.loadComplete();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var items = List<String>.generate(20, (i) => 'Item $i');
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -72,52 +86,28 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-              color: Colors.deepPurple[50],
-            ),
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Account Balance',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      Text(
-                        'Rp 50.0000',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //income
-                        _boxIncomeExpense(isIncome: true),
-                        //expense
-                        _boxIncomeExpense(isIncome: false),
-                      ],
+          _detailHeaderSection(),
+          Expanded(
+            child: SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: true,
+              controller: _refreshController,
+              onRefresh: _onRefresh,
+              onLoading: _onLoading,
+              child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      debugPrint('clicked on index $index');
+                    },
+                    child: const ListTile(
+                      title: Text('Food & Beverages'),
+                      subtitle: Text('Rp 42.000'),
+                      trailing: Icon(Icons.chevron_right_rounded),
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),
@@ -187,6 +177,58 @@ class HomePage extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
               ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _detailHeaderSection() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        color: Colors.deepPurple[50],
+      ),
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Account Balance',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                Text(
+                  'Rp 50.0000',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //income
+                  _boxIncomeExpense(isIncome: true),
+                  //expense
+                  _boxIncomeExpense(isIncome: false),
+                ],
+              ),
             ),
           ],
         ),

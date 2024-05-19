@@ -17,7 +17,7 @@ final router = GoRouter(
       path: PathRoute.home,
       builder: (context, state) => BlocProvider(
         create: (context) => getIt.get<HomeCubit>(),
-        child: const HomePage(),
+        child: HomePage(),
       ),
     ),
     GoRoute(

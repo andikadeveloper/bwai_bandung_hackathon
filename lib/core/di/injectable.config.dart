@@ -38,8 +38,8 @@ import 'package:bwai_bandung_hackathon/domain/usecases/get_default_category.dart
     as _i21;
 import 'package:bwai_bandung_hackathon/domain/usecases/get_transaction_by_id.dart'
     as _i13;
-import 'package:bwai_bandung_hackathon/domain/usecases/get_user.dart' as _i17;
-import 'package:bwai_bandung_hackathon/domain/usecases/sign_in.dart' as _i16;
+import 'package:bwai_bandung_hackathon/domain/usecases/get_user.dart' as _i16;
+import 'package:bwai_bandung_hackathon/domain/usecases/sign_in.dart' as _i17;
 import 'package:bwai_bandung_hackathon/domain/usecases/upsert_transaction.dart'
     as _i19;
 import 'package:bwai_bandung_hackathon/presentation/cubit/category/category_cubit.dart'
@@ -82,10 +82,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i13.GetTransactionById(gh<_i8.TransactionRepository>()));
     gh.lazySingleton<_i14.AccountRepository>(
         () => _i15.AccountRepositoryImpl());
-    gh.factory<_i16.SignInUseCase>(
-        () => _i16.SignInUseCase(gh<_i10.AuthRepository>()));
-    gh.factory<_i17.GetUserUseCase>(
-        () => _i17.GetUserUseCase(gh<_i10.AuthRepository>()));
+    gh.factory<_i16.GetUserUseCase>(
+        () => _i16.GetUserUseCase(gh<_i10.AuthRepository>()));
+    gh.factory<_i17.SignInUseCase>(
+        () => _i17.SignInUseCase(gh<_i10.AuthRepository>()));
     gh.factory<_i18.CreateRecommendation>(() => _i18.CreateRecommendation(
           gh<_i3.GeminiRepository>(),
           gh<_i8.TransactionRepository>(),
@@ -95,13 +95,13 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i14.AccountRepository>(),
         ));
     gh.factory<_i20.ProfileCubit>(
-        () => _i20.ProfileCubit(gh<_i17.GetUserUseCase>()));
+        () => _i20.ProfileCubit(gh<_i16.GetUserUseCase>()));
     gh.factory<_i21.GetDefaultCategory>(
         () => _i21.GetDefaultCategory(gh<_i6.CategoryRepository>()));
     gh.factory<_i22.GetCategories>(
         () => _i22.GetCategories(gh<_i6.CategoryRepository>()));
     gh.factory<_i23.LoginCubit>(
-        () => _i23.LoginCubit(gh<_i16.SignInUseCase>()));
+        () => _i23.LoginCubit(gh<_i17.SignInUseCase>()));
     gh.factory<_i24.CategoryCubit>(
         () => _i24.CategoryCubit(gh<_i22.GetCategories>()));
     gh.factory<_i25.FormTransactionCubit>(() => _i25.FormTransactionCubit(
@@ -111,7 +111,7 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i26.HomeCubit>(() => _i26.HomeCubit(
           gh<_i12.CreateGenerativecontent>(),
-          gh<_i17.GetUserUseCase>(),
+          gh<_i16.GetUserUseCase>(),
         ));
     gh.factory<_i27.RecommendationCubit>(
         () => _i27.RecommendationCubit(gh<_i18.CreateRecommendation>()));
