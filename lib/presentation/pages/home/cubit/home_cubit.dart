@@ -1,6 +1,9 @@
 import 'package:bwai_bandung_hackathon/core/result/result.dart';
 import 'package:bwai_bandung_hackathon/domain/usecases/get_user.dart';
 import 'package:bwai_bandung_hackathon/domain/usecases/sign_in.dart';
+import 'package:bwai_bandung_hackathon/presentation/cubit/account/account_cubit.dart';
+import 'package:bwai_bandung_hackathon/presentation/cubit/transaction/transaction_cubit.dart';
+import 'package:bwai_bandung_hackathon/presentation/cubit/user/user_cubit.dart';
 import 'package:bwai_bandung_hackathon/presentation/routes/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +30,11 @@ class HomeCubit extends Cubit<HomeState> {
       provider: OAuthProvider.google,
     );
     result.when(
-      success: (value) {},
+      success: (value) {
+        context.read<TransactionCubit>().getAll();
+        context.read<UserCubit>().getUser();
+        context.read<AccountCubit>().getAccount();
+      },
       failure: (message) {},
     );
   }

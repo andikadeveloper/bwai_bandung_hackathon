@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
+        forceMaterialTransparency: true,
         title: BlocBuilder<UserCubit, UserState>(
           builder: (context, state) {
             return state.when(
@@ -149,10 +150,12 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _boxIncomeExpense({required bool isIncome}) {
+    var color = isIncome ? Colors.green[400] : Colors.redAccent[400];
+
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        color: isIncome ? Colors.green[200] : Colors.redAccent[200],
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Color.fromRGBO(244, 241, 249, 1),
       ),
       child: Padding(
         padding: const EdgeInsets.all(12),
@@ -160,7 +163,10 @@ class HomePage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 8),
-              child: Icon(isIncome ? Icons.input : Icons.output),
+              child: Icon(
+                isIncome ? Icons.input : Icons.output,
+                color: color,
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,6 +175,7 @@ class HomePage extends StatelessWidget {
                 Text(
                   isIncome ? 'Income' : 'Expense',
                   textAlign: TextAlign.left,
+                  style: TextStyle(color: color, fontWeight: FontWeight.bold),
                 ),
                 BlocBuilder<TransactionCubit, TransactionState>(
                   builder: (context, state) {
@@ -188,11 +195,19 @@ class HomePage extends StatelessWidget {
                           }
 
                           if (isIncome) {
-                            return _amountText(amount: amountIncome);
+                            return _amountText(
+                              amount: amountIncome,
+                              style: TextStyle(color: color),
+                            );
                           }
-                          return _amountText(amount: amountExpense);
+                          return _amountText(
+                            amount: amountExpense,
+                            style: TextStyle(color: color),
+                          );
                         }
-                        return _amountText();
+                        return _amountText(
+                          style: TextStyle(color: color),
+                        );
                       },
                       failure: (message) => _amountText(),
                     );
